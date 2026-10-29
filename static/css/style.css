@@ -1,0 +1,678 @@
+/* ==================================================
+   ENERVISION AI | FUTURISTIC COMMAND INTERFACE
+   Replace the entire contents of static/css/style.css
+   ================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@400;500;600;700;800&display=swap');
+
+:root {
+    color-scheme: dark;
+    --bg: #020711;
+    --panel: rgba(5, 20, 39, .94);
+    --panel2: rgba(7, 31, 54, .94);
+    --text: #e8f7ff;
+    --muted: #9bbbd1;
+    --cyan: #00eaff;
+    --blue: #168bff;
+    --green: #00ffc3;
+    --border: rgba(0, 225, 255, .42);
+    --soft: rgba(0, 225, 255, .16);
+    --shadow: 0 18px 55px rgba(0, 0, 0, .34);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    min-height: 100%;
+    scroll-behavior: smooth;
+}
+
+body {
+    position: relative;
+    isolation: isolate;
+    min-height: 100vh;
+    margin: 0;
+    padding: 24px;
+    overflow-x: hidden;
+
+    color: var(--text);
+    font-family: "Inter", "Segoe UI", Arial, sans-serif;
+
+    background:
+        radial-gradient(ellipse at 50% -12%,
+            rgba(0, 124, 255, .27), transparent 43%),
+        radial-gradient(ellipse at 0% 55%,
+            rgba(0, 234, 255, .09), transparent 34%),
+        radial-gradient(ellipse at 100% 80%,
+            rgba(0, 255, 195, .07), transparent 33%),
+        linear-gradient(145deg,
+            #01040c 0%, #04162b 48%, #020712 100%);
+
+    background-attachment: fixed;
+}
+
+/* Background grid */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+
+    background-image:
+        linear-gradient(
+            rgba(0, 210, 255, .055) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(0, 210, 255, .055) 1px,
+            transparent 1px
+        );
+
+    background-size: 40px 40px;
+
+    mask-image: linear-gradient(
+        to bottom, black, rgba(0, 0, 0, .75) 65%, transparent
+    );
+
+    animation: gridTravel 35s linear infinite;
+}
+
+/* Atmospheric light sweep */
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+
+    background: linear-gradient(
+        115deg,
+        transparent 35%,
+        rgba(0, 234, 255, .045) 48%,
+        rgba(0, 120, 255, .055) 51%,
+        transparent 65%
+    );
+
+    background-size: 220% 100%;
+    animation: lightSweep 16s ease-in-out infinite;
+}
+
+@keyframes gridTravel {
+    from { background-position: 0 0; }
+    to { background-position: 40px 40px; }
+}
+
+@keyframes lightSweep {
+    0%, 100% { background-position: 150% 0; }
+    50% { background-position: -100% 0; }
+}
+
+@keyframes glowPulse {
+    0%, 100% {
+        box-shadow:
+            0 0 12px rgba(0, 234, 255, .045),
+            inset 0 0 20px rgba(0, 234, 255, .018);
+    }
+    50% {
+        box-shadow:
+            0 0 24px rgba(0, 234, 255, .10),
+            inset 0 0 24px rgba(0, 234, 255, .035);
+    }
+}
+
+/* Header */
+.header,
+.container,
+footer {
+    width: 100%;
+    max-width: 1500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+
+    padding: 26px 30px;
+    margin-bottom: 24px;
+    overflow: hidden;
+
+    background:
+        linear-gradient(110deg,
+            rgba(5, 35, 61, .97),
+            rgba(2, 13, 29, .96));
+
+    border: 1px solid var(--border);
+    border-radius: 14px;
+
+    box-shadow:
+        var(--shadow),
+        0 0 28px rgba(0, 210, 255, .07);
+}
+
+.header::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 6%;
+    width: 38%;
+    height: 2px;
+
+    background: linear-gradient(
+        90deg, transparent, var(--cyan), var(--green), transparent
+    );
+
+    box-shadow: 0 0 16px var(--cyan);
+}
+
+.header::after {
+    content: "";
+    position: absolute;
+    width: 230px;
+    height: 230px;
+    right: -100px;
+    top: -150px;
+    border: 1px solid rgba(0, 234, 255, .13);
+    border-radius: 50%;
+    box-shadow:
+        0 0 0 24px rgba(0, 234, 255, .025),
+        0 0 0 48px rgba(0, 234, 255, .018);
+    pointer-events: none;
+}
+
+.brand {
+    position: relative;
+    z-index: 1;
+}
+
+.brand h1 {
+    margin: 0;
+    color: var(--cyan);
+
+    font-family: "Orbitron", "Segoe UI", sans-serif;
+    font-size: clamp(1.65rem, 3vw, 2.6rem);
+    font-weight: 800;
+    letter-spacing: 1.2px;
+
+    text-shadow:
+        0 0 8px rgba(0, 234, 255, .65),
+        0 0 28px rgba(0, 140, 255, .25);
+}
+
+.brand p {
+    margin: 10px 0 0;
+    color: var(--muted);
+    font-size: .94rem;
+    line-height: 1.65;
+}
+
+/* Dashboard grid */
+.container {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+    gap: 22px;
+}
+
+/* Holographic panels */
+.card {
+    position: relative;
+    min-width: 0;
+    padding: 26px;
+    overflow: hidden;
+
+    background:
+        linear-gradient(145deg,
+            rgba(7, 31, 53, .97),
+            rgba(2, 13, 28, .97));
+
+    border: 1px solid var(--border);
+    border-radius: 13px;
+
+    box-shadow:
+        var(--shadow),
+        inset 0 0 28px rgba(0, 190, 255, .025);
+
+    animation: glowPulse 8s ease-in-out infinite;
+
+    transition:
+        border-color .25s ease,
+        box-shadow .25s ease,
+        transform .25s ease;
+}
+
+/* Futuristic corner markers */
+.card::before,
+.card::after {
+    content: "";
+    position: absolute;
+    width: 43px;
+    height: 14px;
+    pointer-events: none;
+}
+
+.card::before {
+    top: 0;
+    left: 0;
+    border-top: 2px solid var(--cyan);
+    border-left: 2px solid var(--cyan);
+    filter: drop-shadow(0 0 5px var(--cyan));
+}
+
+.card::after {
+    right: 0;
+    bottom: 0;
+    border-right: 2px solid var(--green);
+    border-bottom: 2px solid var(--green);
+    filter: drop-shadow(0 0 5px var(--green));
+}
+
+.card:hover {
+    border-color: rgba(0, 234, 255, .75);
+    box-shadow:
+        0 0 28px rgba(0, 210, 255, .11),
+        var(--shadow);
+}
+
+.card h2 {
+    margin: 0 0 12px;
+    color: var(--cyan);
+
+    font-family: "Orbitron", "Segoe UI", sans-serif;
+    font-size: 1.08rem;
+    font-weight: 700;
+    letter-spacing: .25px;
+    line-height: 1.6;
+}
+
+.card h3 {
+    color: var(--green);
+    font-family: "Orbitron", "Segoe UI", sans-serif;
+    font-size: .98rem;
+}
+
+.card > p {
+    color: var(--muted);
+    line-height: 1.75;
+}
+
+/* Buttons */
+button {
+    position: relative;
+    min-height: 44px;
+    padding: 12px 17px;
+    overflow: hidden;
+
+    color: var(--text);
+    font-family: "Inter", "Segoe UI", sans-serif;
+    font-size: .88rem;
+    font-weight: 600;
+
+    background: linear-gradient(
+        130deg,
+        rgba(0, 123, 205, .25),
+        rgba(0, 234, 255, .055)
+    );
+
+    border: 1px solid rgba(0, 210, 255, .58);
+    border-radius: 8px;
+    cursor: pointer;
+
+    transition:
+        color .2s ease,
+        background .2s ease,
+        border-color .2s ease,
+        box-shadow .2s ease,
+        transform .2s ease;
+}
+
+button:hover:not(:disabled) {
+    color: #00131f;
+    background: linear-gradient(110deg, var(--cyan), var(--green));
+    border-color: var(--cyan);
+
+    box-shadow:
+        0 0 14px rgba(0, 234, 255, .35),
+        0 0 28px rgba(0, 234, 255, .10);
+
+    transform: translateY(-2px);
+}
+
+button:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+button:disabled {
+    opacity: .42;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+button:focus-visible,
+input:focus-visible {
+    outline: 2px solid var(--cyan);
+    outline-offset: 3px;
+}
+
+#themeToggleBtn {
+    z-index: 1;
+    flex-shrink: 0;
+    border-radius: 30px;
+    border-color: var(--cyan);
+    padding: 12px 19px;
+}
+
+/* Camera controls */
+.button-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 18px 0;
+}
+
+.button-row button {
+    flex: 1 1 135px;
+}
+
+/* Camera and image preview */
+#cameraPreview,
+#capturedPreview {
+    display: block;
+    width: 100%;
+    max-height: 330px;
+    margin: 18px 0;
+
+    object-fit: contain;
+    background: #020a16;
+
+    border: 1px solid var(--cyan);
+    border-radius: 10px;
+
+    box-shadow:
+        0 0 16px rgba(0, 234, 255, .10),
+        inset 0 0 24px rgba(0, 234, 255, .04);
+}
+
+/* Preserve hidden state used by JavaScript */
+#cameraPreview[hidden],
+#capturedPreview[hidden],
+#capturedFrame[hidden],
+#results[hidden] {
+    display: none !important;
+}
+
+#capturedFrame {
+    display: none;
+}
+
+/* Form elements */
+label {
+    display: block;
+    margin: 12px 0 8px;
+    color: var(--muted);
+    font-size: .9rem;
+    font-weight: 600;
+}
+
+input[type="file"],
+input[type="text"],
+input[type="url"],
+input[type="number"] {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    margin: 10px 0 16px;
+    padding: 12px;
+
+    color: var(--text);
+    background: rgba(2, 12, 27, .94);
+
+    border: 1px solid var(--soft);
+    border-radius: 8px;
+    font: inherit;
+}
+
+input[type="file"] {
+    padding: 9px;
+}
+
+input::file-selector-button {
+    margin-right: 12px;
+    padding: 8px 12px;
+
+    color: var(--text);
+    background: #0b2c45;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Status readouts */
+.status {
+    margin-top: 14px;
+    padding: 12px 14px;
+
+    color: var(--muted);
+    font-size: .86rem;
+    line-height: 1.65;
+    overflow-wrap: anywhere;
+
+    background: rgba(0, 150, 255, .055);
+    border: 1px solid var(--soft);
+    border-radius: 8px;
+}
+
+.small-note {
+    color: var(--muted);
+    font-size: .79rem;
+    line-height: 1.7;
+}
+
+/* Detection result panel */
+.result-panel {
+    position: relative;
+    margin-top: 20px;
+    padding: 19px;
+    overflow: hidden;
+
+    background:
+        radial-gradient(ellipse at 50% 0%,
+            rgba(0, 153, 255, .13), transparent 65%),
+        rgba(2, 12, 27, .8);
+
+    border: 1px solid var(--border);
+    border-radius: 10px;
+}
+
+.result-panel h3 {
+    margin-top: 0;
+}
+
+.result-panel p {
+    margin: 0;
+    padding: 10px 0;
+    color: var(--text);
+    line-height: 1.65;
+    overflow-wrap: anywhere;
+    border-bottom: 1px solid var(--soft);
+}
+
+.result-panel p:last-child {
+    border-bottom: none;
+}
+
+/* Wi-Fi network results */
+.network-list {
+    display: grid;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.network-list button,
+.network-list .network-item {
+    width: 100%;
+    text-align: left;
+}
+
+/* ESP32 actions */
+#sendDataBtn,
+#requestPermissionBtn {
+    width: 100%;
+    margin-top: 12px;
+}
+
+#requestPermissionBtn {
+    color: #00151d;
+    background: linear-gradient(105deg, #00dfff, #00efbd);
+    border-color: transparent;
+}
+
+#requestPermissionBtn:hover:not(:disabled) {
+    background: linear-gradient(105deg, #57efff, #5affd5);
+}
+
+/* Footer */
+footer {
+    margin-top: 25px;
+    padding: 20px 10px;
+
+    color: var(--muted);
+    text-align: center;
+    font-size: .83rem;
+    letter-spacing: .35px;
+
+    border-top: 1px solid var(--soft);
+}
+
+/* ================= LIGHT THEME ================= */
+
+body.light-theme {
+    color-scheme: light;
+
+    --text: #18354b;
+    --muted: #5b7489;
+    --cyan: #007da8;
+    --blue: #147ce5;
+    --green: #008f77;
+    --border: rgba(0, 125, 168, .36);
+    --soft: rgba(0, 125, 168, .17);
+
+    background:
+        radial-gradient(ellipse at 50% 0%,
+            rgba(0, 175, 225, .17), transparent 45%),
+        linear-gradient(145deg, #f8fcff, #e7f3fb 65%, #edf8fc);
+}
+
+body.light-theme .header {
+    background: linear-gradient(110deg, #fff, #e9f7ff);
+}
+
+body.light-theme .card {
+    background: linear-gradient(145deg, #fff, #f0f8fd);
+    box-shadow: 0 12px 35px rgba(31, 80, 110, .09);
+}
+
+body.light-theme .result-panel {
+    background: rgba(222, 243, 253, .7);
+}
+
+body.light-theme .status {
+    background: rgba(0, 125, 168, .05);
+}
+
+body.light-theme button {
+    color: var(--text);
+    background: #e8f5fb;
+}
+
+body.light-theme button:hover:not(:disabled) {
+    color: #fff;
+    background: linear-gradient(110deg, #087da4, #008f77);
+}
+
+body.light-theme #requestPermissionBtn {
+    color: #fff;
+    background: linear-gradient(105deg, #087da4, #008f77);
+}
+
+body.light-theme input[type="file"],
+body.light-theme input[type="text"],
+body.light-theme input[type="url"],
+body.light-theme input[type="number"] {
+    color: var(--text);
+    background: #fff;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 900px) {
+    body {
+        padding: 15px;
+    }
+
+    .container {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .header {
+        padding: 22px;
+    }
+
+    .card:hover {
+        transform: none;
+    }
+}
+
+@media (max-width: 560px) {
+    body {
+        padding: 10px;
+    }
+
+    .header {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 18px;
+    }
+
+    .brand h1 {
+        font-size: 1.55rem;
+        letter-spacing: .4px;
+    }
+
+    .card {
+        padding: 18px;
+    }
+
+    .button-row {
+        flex-direction: column;
+    }
+
+    .button-row button {
+        width: 100%;
+    }
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    body::before,
+    body::after,
+    .card {
+        animation: none !important;
+    }
+
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+    }
+}

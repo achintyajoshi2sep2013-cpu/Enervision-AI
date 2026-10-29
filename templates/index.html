@@ -1,0 +1,114 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Enervision AI</title>
+
+  <link rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}">
+
+  <script src="{{ url_for('static', filename='js/theme.js') }}" defer></script>
+  <script src="{{ url_for('static', filename='js/camera.js') }}" defer></script>
+  <script src="{{ url_for('static', filename='js/wifi.js') }}" defer></script>
+</head>
+
+<body>
+  <header class="header">
+    <div class="brand">
+      <h1>Enervision AI</h1>
+      <p>Appliance recognition and estimated power insights</p>
+    </div>
+    <button id="themeToggleBtn" type="button">🌙 Dark Mode</button>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h2>Appliance Recognition</h2>
+      <p>Capture an image or upload an appliance photo.</p>
+
+      <video id="cameraPreview" autoplay playsinline muted hidden></video>
+      <canvas id="capturedFrame" hidden></canvas>
+      <img id="capturedPreview" alt="Selected appliance image" hidden>
+
+      <div class="button-row">
+        <button id="startCameraBtn" type="button">Start Camera</button>
+        <button id="captureFrameBtn" type="button" disabled>Capture Frame</button>
+        <button id="stopCameraBtn" type="button">Stop Camera</button>
+      </div>
+
+      <label for="imageUpload">Upload an image</label>
+      <input id="imageUpload" type="file" accept="image/*">
+
+      <button id="detectApplianceBtn" type="button" disabled>
+        Detect Appliance
+      </button>
+
+      <p id="cameraStatus" class="status" role="status">
+        Camera is not started.
+      </p>
+      <p id="detectionStatus" class="status" role="status" aria-live="polite"></p>
+
+      <div id="results" class="result-panel" hidden>
+        <h3>Detection Result</h3>
+        <p id="applianceName"></p>
+        <p id="applianceConfidence"></p>
+        <p id="applianceWattage"></p>
+        <p id="detectionTime"></p>
+        <p id="applianceMessage"></p>
+      </div>
+
+      <p class="small-note">
+        Power values are typical estimates, not live measurements.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>Wi-Fi Connection</h2>
+      <p>Scan for networks visible to this Windows computer.</p>
+
+      <button id="refreshNetworksBtn" type="button">
+        Scan Wi-Fi Networks
+      </button>
+
+      <div id="wifiNetworks" class="network-list"></div>
+      <p id="wifiStatus" class="status" role="status" aria-live="polite">
+        Click scan to list available networks.
+      </p>
+
+      <p class="small-note">
+        Windows handles the actual Wi-Fi connection. Switching networks
+        may interrupt internet access.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>ESP32 Connection</h2>
+      <p>Connect your computer to the ESP32 Wi-Fi network first, if applicable.</p>
+
+      <label for="esp32Url">ESP32 web-server address</label>
+      <input id="esp32Url" type="url"
+             value="http://192.168.4.1"
+             placeholder="http://192.168.4.1">
+
+      <p id="esp32Status" class="status" role="status" aria-live="polite">
+        Detect an appliance to enable data sending.
+      </p>
+
+      <button id="sendDataBtn" type="button" disabled>
+        Send Latest Appliance Data
+      </button>
+
+      <p class="small-note">
+        Sends the appliance prediction and estimated power range to ESP32.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <p>Enervision AI · Appliance Recognition</p>
+  </footer>
+</body>
+</html>
